@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>{{pet.name}}</title>
+</head>
+<body>
+    <a href="/" class="btn btn-info btn-lg">Home</a>
+    <div class="container">
+    <h1 class="text-center">{{pet.name}}</h1>
+    <h3 class="text-center">{{pet.species}}</h3>
+    {% if pet.age %}
+    <h5 class="text-center">{{pet.age}} years old</h5>
+    {% endif %}
+    {% if pet.available %}
+    <h3 class="text-center">Available</h3>
+    {% endif %}
+    {% if pet.notes %}
+    <p class="text-center">{{pet.notes}}</p>
+    {% endif %}
+    <div class="card"><img src="{{pet.photo_url}}" alt=""></div>
+    
+</div class="form-control">
+    <h4>Edit {{pet.name}}'s Info:</h4>
+    <form method="POST">
+        {{form.hidden_tag()}}
+        {% for field in form
+            if field.widget.input_type != 'hidden' %}
+        <p class="form-group">
+            {{field.label}}
+            {{field}}
+
+            {% for err in field.errors %}
+                {{err}}
+            {% endfor %}
+        </p>
+        {% endfor %}
+        <button class="btn btn-success">Save</button>
+    </form>
+</body>
+</html>
